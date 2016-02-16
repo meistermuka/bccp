@@ -2,6 +2,7 @@ CC=gcc
 CFLAGS=-c -Wall
 LDFLAGS=
 SOURCES=src/bccpHelpers.c src/bccpModule.c
+INCLUDES=-I/usr/local/include/gphoto2/gphoto2 -Isrc
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=bccpapp
 RM := rm -rf
@@ -12,7 +13,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@ -lgphoto2
 
 .c.o:
-	$(CC) -I/usr/local/include/gphoto2/gphoto2 -Isrc $(CFLAGS) $< -o $@
+	$(CC) $(INCLUDES) $(CFLAGS) $< -o $@
 
 clean:
 	-$(RM) $(OBJECTS) $(EXECUTABLE)
