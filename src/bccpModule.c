@@ -90,7 +90,7 @@ int main(void) {
 	Camera *camera;
 	GPContext *context;
 
-	context = create_contex();
+	context = create_context();
 	gp_camera_new(&camera);
 
 	ret = gp_camera_init(camera, context);

@@ -1,26 +1,19 @@
-OBJS += \
-./src/bccpHelpers.o \
-./src/bccpModule.o 
-
+CC=gcc
 CFLAGS=-c -Wall
-
+LDFLAGS=
+SOURCES=src/bccpHelpers.c src/bccpModule.c
+OBJECTS=$(SOURCES:.c=.o)
+EXECUTABLE=bccpapp
 RM := rm -rf
 
-all: bccpModule
+all: $(SOURCES) $(EXECUTABLE)
 
-bccpModule: $(OBJS)
-	@echo 'Building target: $@'
-	@echo 'Invoking: GCC C Linker'
-	gcc -o bccpapp $(OBJS) -I/user/local/include/gphoto2/gphoto2 -I"/home/muka/REPOS/GIT/bccp/src" -O0 -g3 -Wall -c -fmessage-length=0
-	@echo 'Finished building: $<'
-	@echo ' '
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
-bccpHelpers.o: bccpHelpers.c
-	gcc $(CFLAGS) bccpHelpers.c
-
-bccpModule.o: bccpModule.c
-	gcc $(CFLAGS) bccpModule.c
+.c.o:
+	$(CC) -I/usr/local/include/gphoto2/gphoto2 -Isrc $(CFLAGS) $< -o $@
 
 clean:
-	-$(RM) $(OBJS) bccpapp
+	-$(RM) $(OBJECTS) $(EXECUTABLE)
 	-@echo ' '
