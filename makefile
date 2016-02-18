@@ -10,11 +10,11 @@ RM := rm -rf
 all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@ -lgphoto2
+	$(CC) $(LDFLAGS) $(OBJECTS) -o bin/$@ -lgphoto2
 
 .c.o:
 	$(CC) $(INCLUDES) $(CFLAGS) $< -o $@
 
 clean:
-	-$(RM) $(OBJECTS) $(EXECUTABLE)
+	-$(RM) $(OBJECTS) bin/$(EXECUTABLE)
 	-@echo ' '

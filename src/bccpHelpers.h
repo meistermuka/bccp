@@ -79,6 +79,7 @@
 #define SPEED20			"20"
 #define SPEED25			"25"
 #define SPEED30			"30"
+#define CLEAR_TERM  printf("\033[2J\033[1;1H")
 
 extern GPContext* create_context(void);
 extern int get_config_value_string (Camera *, const char *, char **, GPContext *);
@@ -91,3 +92,4 @@ char* get_aperture(Camera *, GPContext *);
 int set_aperture(Camera *, GPContext *, const char *);
 char* get_shutterspeed(Camera *, GPContext *);
 int set_shutterspeed(Camera *, GPContext *, const char *);
+int menu(void);

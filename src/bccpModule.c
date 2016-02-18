@@ -84,9 +84,30 @@ int set_shutterspeed(Camera *camera, GPContext *context, const char *shutterspee
 
 }
 
+int menu(void) {
+
+    CLEAR_TERM;
+    int cmd = 0;
+
+    printf("=====| BCC: Basic Camera Control |=====\n");
+    printf("Choose a command:\n\n");
+    printf("1) Camera Info\n");
+    printf("2) GET/SET Shutter Speed\n");
+    printf("3) GET/SET ISO\n");
+    printf("4) GET/SET Aperture\n");
+    printf("5) Capture Image\n");
+    printf("0) Exit Program\n");
+    printf("\n=====================================\n");
+
+    scanf("%d", cmd);
+    CLEAR_TERM;
+    return cmd;
+
+}
+
 int main(void) {
 
-	int ret;
+	int ret, cmd;
 	Camera *camera;
 	GPContext *context;
 
@@ -99,10 +120,26 @@ int main(void) {
 		printf("No camera detected.\n");
 		gp_camera_free(camera);
 		return -1;
-	} else {
-		printf("Camera detected.\n");
-		printf("%s\n", get_camerainfo(camera, context));
 	}
+    
+    while(cmd!=0) {
+        
+        cmd = menu();
+
+        switch(cmd) {
+            case 1:
+                printf("%s\n", get_camerainfo(camera, context));
+                break;
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                printf("Nothing to do for now!\n");
+                break;
+            default:
+                break;
+        }
+    }
 
 	gp_camera_exit(camera, context);
 	gp_camera_free(camera);
